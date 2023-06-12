@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
@@ -11,7 +12,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return view('Task.index', [
+            'tasks' => Task::all()
+        ]);
     }
 
     /**
@@ -19,7 +22,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('Task.form');
     }
 
     /**
@@ -27,7 +30,19 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'status' => 'required|boolean'
+        ]);
+
+        $new_task = new Task;
+        $new_task->judul = $request->judul;
+        $new_task->deskripsi = $request->deskripsi;
+        $new_task->status = $request->status;
+        $new_task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -43,7 +58,9 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('Task.form', [
+            'task' => Task::find($id),
+        ]);
     }
 
     /**
@@ -51,7 +68,19 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'status' => 'required|boolean'
+        ]);
+
+        $task = Task::find($id);
+        $task->judul = $request->judul;
+        $task->deskripsi = $request->deskripsi;
+        $task->status = $request->status;
+        $task->save();
+
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -59,6 +88,8 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Task::destroy($id);
+
+        return redirect()->route('tasks.index');
     }
 }
