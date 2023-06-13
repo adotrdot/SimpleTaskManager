@@ -24,7 +24,7 @@
             <div class="row my-2">
                 <div class="col my-2">
                     <label for="formDeskripsi" class="form-label">Deskripsi Task</label>
-                    <textarea class="form-control" name="deskripsi" id="formDeskripsi" rows="3" required>@isset($task->deskripsi) {{ $task->deskripsi }} @endisset</textarea>
+                    <textarea class="form-control" name="deskripsi" id="formDeskripsi" rows="3" required>@isset($task->deskripsi){{ $task->deskripsi }}@endisset</textarea>
                 </div>
             </div>
             <div class="row my-2">
