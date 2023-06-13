@@ -36,27 +36,27 @@
                         <td style="white-space: pre-wrap;">{{ $task->deskripsi }}</td>
                         <td>@if ($task->status) Selesai @else Belum selesai @endif</td>
                         <td>
-                            <a class="btn btn-secondary" href="{{ route('tasks.edit', ['task' => $task->id]) }}" role="button">
+                            <a title="Edit task" class="btn btn-secondary" href="{{ route('tasks.edit', ['task' => $task->id]) }}" role="button">
                                 <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
                             </a>
                             <form style="display: inline;" action="{{ route('tasks.set', ['id' => $task->id, 'status' => 0]) }}" method="post">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" class="btn btn-warning">
+                                <button title="Set task sebagai incomplete" type="submit" class="btn btn-warning">
                                     <i class="fa-solid fa-stopwatch" style="color: #ffffff;"></i>
                                 </button>
                             </form>
                             <form style="display: inline;" action="{{ route('tasks.set', ['id' => $task->id, 'status' => 1]) }}" method="post">
                                 @csrf
                                 @method('PUT')
-                                <button type="submit" class="btn btn-success">
+                                <button title="Set task sebagai complete" type="submit" class="btn btn-success">
                                     <i class="fa-solid fa-check" style="color: #ffffff;"></i>
                                 </button>
                             </form>
                             <form style="display: inline;" action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
+                                <button title="Hapus task" type="submit" class="btn btn-danger">
                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </button>
                             </form>
