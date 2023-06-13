@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
         <script src="https://kit.fontawesome.com/abe7da9dbb.js" crossorigin="anonymous"></script>
     </head>
-    <body class="mx-auto my-4 w-75">
+    <body class="mx-auto px-5 my-4 w-100">
         <h1 class="text-center">Tasks List</h1>
         <a class="btn btn-secondary my-2" href="{{ route('home') }}" role="button">Kembali</a>
         <a class="btn btn-warning my-2" href="{{ route('tasks.create') }}" role="button">Tambah Task</a>
@@ -39,12 +39,26 @@
                             <a class="btn btn-secondary" href="{{ route('tasks.edit', ['task' => $task->id]) }}" role="button">
                                 <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
                             </a>
+                            <form style="display: inline;" action="{{ route('tasks.set', ['id' => $task->id, 'status' => 0]) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fa-solid fa-stopwatch" style="color: #ffffff;"></i>
+                                </button>
+                            </form>
+                            <form style="display: inline;" action="{{ route('tasks.set', ['id' => $task->id, 'status' => 1]) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-check" style="color: #ffffff;"></i>
+                                </button>
+                            </form>
                             <form style="display: inline;" action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                                </submit>
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -95,6 +95,14 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
+    public function set_status(string $id, string $status) {
+        $task = Task::find($id);
+        $task->status = (bool) $status;
+        $task->save();
+
+        return redirect()->route('tasks.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
