@@ -17,6 +17,18 @@ class TaskController extends Controller
         ]);
     }
 
+    public function show_completed() {
+        return view('Task.index', [
+            'tasks' => Task::all()->where('status', true)
+        ]);
+    }
+
+    public function show_incomplete() {
+        return view('Task.index', [
+            'tasks' => Task::all()->where('status', false)
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

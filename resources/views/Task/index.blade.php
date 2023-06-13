@@ -15,6 +15,10 @@
         <h1 class="text-center">Tasks List</h1>
         <a class="btn btn-secondary my-2" href="{{ route('home') }}" role="button">Kembali</a>
         <a class="btn btn-warning my-2" href="{{ route('tasks.create') }}" role="button">Tambah Task</a>
+        </br>
+        <a class="btn btn-link my-2 @if (Route::is('tasks.incomplete')) disabled @endif" href="{{ route('tasks.incomplete') }}" role="button">Lihat Task Incomplete</a>
+        <a class="btn btn-link my-2 @if (Route::is('tasks.completed')) disabled @endif" href="{{ route('tasks.completed') }}" role="button">Lihat Task Completed</a>
+        <a class="btn btn-link my-2 @if (Route::is('tasks.index')) disabled @endif" href="{{ route('tasks.index') }}" role="button">Lihat Semua Task</a>
         <table id="tabelTask" class="table table-striped">
             <thead>
                 <th>No.</th>
@@ -28,8 +32,8 @@
                 @foreach ($tasks as $task)
                     <tr>
                         <td>{{ $i++}}</td>
-                        <td>{{ $task->judul }}</td>
-                        <td>{{ $task->deskripsi }}</td>
+                        <td style="white-space: pre-wrap;">{{ $task->judul }}</td>
+                        <td style="white-space: pre-wrap;">{{ $task->deskripsi }}</td>
                         <td>@if ($task->status) Selesai @else Belum selesai @endif</td>
                         <td>
                             <a class="btn btn-secondary" href="{{ route('tasks.edit', ['task' => $task->id]) }}" role="button">
